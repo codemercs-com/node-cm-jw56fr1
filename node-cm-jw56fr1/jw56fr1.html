@@ -1,0 +1,305 @@
+<!--
+  Copyright Code Mercenaries GmbH, http://codemercs.com
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!--Get RAW data from device-->
+<script type="text/html" data-template-name="get data">
+<div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+</div>
+</script>
+
+<script type="text/html" data-help-name="get data">
+    <p>Throws the axis and buttons of a JoyWarrio56FR1 without change config</p>
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('get data', {
+		category: 'JW56FR1',
+		color: '#94C1D0',
+		defaults: {
+			acceleration: { value: "0" },
+			rotation: { value: "0" },
+			name: { value: "" }
+		},
+		inputs: 0,
+		outputs: 1,
+		align: "left",
+		icon: "status.svg",
+		label: function () {
+			return this.name || "get data";
+		},
+		labelStyle: function () {
+			return this.name ? "node_label_italic" : "";
+		},
+		oneditprepare: function () { },
+		oneditsave: function () { },
+		oneditcancel: function () { },
+		oneditdelete: function () { },
+		oneditresize: function () { }
+	});
+</script>
+
+<!--Get data from device with options to set range-->
+<script type="text/html" data-template-name="get data ext">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-acceleration"> Acceleration</label>
+        <select id="node-input-acceleration">
+            <option value="0">+-2g</option>
+            <option value="1">+-4g</option>
+            <option value="2">+-8g</option>
+            <option value="3">+-16g</option>
+        </select>
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-rotation"> Rotation</label>
+        <select id="node-input-rotation">
+            <option value="0">125dps</option>
+            <option value="1">245dps</option>
+            <option value="2">500dps</option>
+            <option value="3">1000dps</option>
+            <option value="4">2000dps</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="get data ext">
+    <p>Throws the axis and buttons of a JoyWarrio56FR1, overwrite existing config temporary</p>
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('get data ext', {
+		category: 'JW56FR1',
+		color: '#94C1D0',
+		defaults: {
+			acceleration: { value: "0" },
+			rotation: { value: "0" },
+			name: { value: "" }
+		},
+		inputs: 0,
+		outputs: 1,
+		align: "left",
+		icon: "status.svg",
+		label: function () {
+			return this.name || "get data ext";
+		},
+		labelStyle: function () {
+			return this.name ? "node_label_italic" : "";
+		},
+		oneditprepare: function () { },
+		oneditsave: function () { },
+		oneditcancel: function () { },
+		oneditdelete: function () { },
+		oneditresize: function () { }
+	});
+</script>
+
+
+<!--Config Node for store setup temporary or persitent-->
+<script type="text/html" data-template-name="set config">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row"><hr></div>
+
+    <div class="form-row">
+        <label for="node-input-store"> Config location</label>
+        <select id="node-input-store">
+            <option value="0">Temporary</option>
+            <option value="1">Permanent</option>
+        </select>
+    </div>
+
+    <div class="form-row"><hr></div>
+
+    <div class="form-row">
+        <label for="node-input-acceleration"> Acceleration</label>
+        <select id="node-input-acceleration">
+            <option value="0">+-2g</option>
+            <option value="1">+-4g</option>
+            <option value="2">+-8g</option>
+            <option value="3">+-16g</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-afilt1"> Acceleration pass filter</label>
+        <select id="node-input-afilt1">
+            <option value="0">LP only (default)</option>
+            <option value="1">LP1+HP</option>
+            <option value="2">LP1+LP2</option>
+            <option value="3">LP1+HP</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-afilt2"> Acceleration LP bandw.</label>
+        <select id="node-input-afilt2">
+            <option value="0">416.5Hz (default)</option>
+            <option value="1">205.25Hz</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-afilt3"> Acceleration BW</label>
+        <select id="node-input-afilt3">
+            <option value="0">LP1+LP2 16.66Hz (default)</option>
+            <option value="1">LP1+LP2 8.33Hz</option>
+            <option value="2">LP1+LP2 92.56Hz</option>
+            <option value="3">LP1+LP2 2.08Hz</option>
+            <option value="4">LP1+HP  208.25Hz</option>
+            <option value="5">LP1+HP  8.33Hz</option>
+            <option value="6">LP1+HP  92.56Hz</option>
+            <option value="7">LP1+HP  2.08Hz</option>
+        </select>
+    </div>
+
+    <div class="form-row"><hr></div>
+
+    <div class="form-row">
+        <label for="node-input-rotation"> Rotation</label>
+        <select id="node-input-rotation">
+            <option value="0">125dps</option>
+            <option value="1">245dps</option>
+            <option value="2">500dps</option>
+            <option value="3">1000dps</option>
+            <option value="4">2000dps</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-rfilt1"> Rotation HP</label>
+        <select id="node-input-rfilt1">
+            <option value="0">OFF (default)</option>
+            <option value="1">ON</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-rfilt2"> Rotation BW.</label>
+        <select id="node-input-rfilt2">
+            <option value="0">16mHz (default)</option>
+            <option value="1">65mHz</option>
+            <option value="2">260mHz</option>
+            <option value="3">1.04Hz</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="set config">
+    <p>Setup JoyWarrio56FR1 configuration</p>
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('set config', {
+		category: 'JW56FR1',
+		color: '#94C1D0',
+		defaults: {
+			name: { value: "" },
+			store: { value: "0" },
+			acceleration: { value: "0" },
+			afilt1: { value: "0" },
+			afilt2: { value: "0" },
+			afilt3: { value: "0" },
+			rotation: { value: "0" },
+			rfilt1: { value: "0" },
+			rfilt2: { value: "0" }
+		},
+		inputs: 1,
+		outputs: 0,
+		align: "right",
+		icon: "status.svg",
+		label: function () {
+			return this.name || "set config";
+		},
+		labelStyle: function () {
+			return this.name ? "node_label_italic" : "";
+		},
+		oneditprepare: function () { },
+		oneditsave: function () { },
+		oneditcancel: function () { },
+		oneditdelete: function () { },
+		oneditresize: function () { }
+	});
+</script>
+
+<!--Contert RAW data into miliG-->
+<script type="text/html" data-template-name="convert data">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-acceleration"> Acceleration</label>
+        <select id="node-input-acceleration">
+            <option value="0">+-2g</option>
+            <option value="1">+-4g</option>
+            <option value="2">+-8g</option>
+            <option value="3">+-16g</option>
+        </select>
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-rotation"> Rotation</label>
+        <select id="node-input-rotation">
+            <option value="0">125dps</option>
+            <option value="1">245dps</option>
+            <option value="2">500dps</option>
+            <option value="3">1000dps</option>
+            <option value="4">2000dps</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="convert data">
+	<p>Convert data from RAW 16Bit to readable values from</p>
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('convert data', {
+		category: 'JW56FR1',
+		color: '#94C1D0',
+		defaults: {
+			acceleration: { value: "0" },
+			rotation: { value: "0" },
+			name: { value: "" }
+		},
+		inputs: 1,
+		outputs: 1,
+		align: "left",
+		icon: "status.svg",
+		label: function () {
+			return this.name || "convert data";
+		},
+		labelStyle: function () {
+			return this.name ? "node_label_italic" : "";
+		},
+		oneditprepare: function () { },
+		oneditsave: function () { },
+		oneditcancel: function () { },
+		oneditdelete: function () { },
+		oneditresize: function () { }
+	});
+</script>
