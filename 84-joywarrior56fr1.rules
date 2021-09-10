@@ -1,0 +1,1 @@
+KERNEL=="hidraw*", ATTRS{idVendor}=="07c0", ATTRS{idProduct}=="111a", MODE:="0666", GROUP="plugdev"
