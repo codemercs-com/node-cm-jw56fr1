@@ -3,7 +3,8 @@ This set of node-red nodes communicate with the JoyWarrior56FR1 on a Raspberry P
 ------------
 
 ### Install NODE
-Copy the folder 'node-cm-jw56fr1' into ~./node-red/node_modules and start/restart your Node-Red server.
+Copy the folder 'node-cm-jw56fr1' into ~./node-red/node_modules and start/restart your Node-Red server.  
+You need also the node-js component 'node-hid' from https://github.com/node-hid/node-hid. Please follow the install instructions on this github page
 
 ------------
 
